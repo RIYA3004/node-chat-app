@@ -13,7 +13,8 @@ app.use(express.static(publicPath));
 // the static is the methid to fire up static files  like html,css, and javascript
 io.on('connection',(socket)=>{
   console.log('New User Connected');
-
+//socket.emit from admin text Welcome to chat app
+//broadcast.emit from admin new user joined
   socket.on('createMessage', (message)=>{
     console.log('createMessage',message);
     io.emit('newMessage',{
@@ -21,7 +22,12 @@ io.on('connection',(socket)=>{
       text:message.text,
       createdAt:new Date().getTime()
     });
-  });
+//     socket.broadcast.emit('newMessage',{
+//       from:message.from,
+//       text:message.text,
+//       createdAt:new Date().getTime()
+//   });
+});
   socket.on('disconnect',()=>{
     console.log("User disconnected");
   });
